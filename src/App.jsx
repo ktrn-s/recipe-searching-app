@@ -9,19 +9,14 @@ function App() {
   const [submitted, setSubmitted] = useState("pasta");
 
   useEffect(() => {
-    const getRecipe = async() => {
-        const response = await fetch(`/.netlify/functions/get-recipes?q=${submitted}`,
-      {
-        headers: {
-          "Edamam-Account-User": "student"
-        }
-      }
-      );
-      const data = await response.json();
-      setMyRecipes(data.hits);
-    }
-    getRecipe()
-  },[submitted]);
+  const getRecipe = async () => {
+    const response = await fetch(`/.netlify/functions/get-recipes?q=${submitted}`);
+    const data = await response.json();
+    setMyRecipes(data);
+  };
+  getRecipe();
+}, [submitted]);
+
   const myRecipeSearch = (e) => {
     setMySearch(e.target.value);
   }
