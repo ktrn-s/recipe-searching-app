@@ -9,6 +9,14 @@ export async function handler(event) {
             `https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`
         );
 
+        if (!response.ok) {
+            // If API returns 401/403 or other errors
+            return {
+                statusCode: response.status,
+                body: JSON.stringify({ error: `Edamam API error: ${response.statusText}` })
+            };
+        }
+
         const data = await response.json();
 
         return {
