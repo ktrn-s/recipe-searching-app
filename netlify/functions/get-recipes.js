@@ -10,7 +10,6 @@ export async function handler(event) {
         );
 
         if (!response.ok) {
-            // If API returns 401/403 or other errors
             return {
                 statusCode: response.status,
                 body: JSON.stringify({ error: `Edamam API error: ${response.statusText}` })
