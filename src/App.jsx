@@ -10,9 +10,13 @@ function App() {
 
   useEffect(() => {
   const getRecipe = async () => {
-    const response = await fetch(`/.netlify/functions/get-recipes?q=${submitted}`);
-    const data = await response.json();
-    setMyRecipes(data);
+    try {
+      const response = await fetch(`/.netlify/functions/get-recipes?q=${submitted}`);
+      const data = await response.json();
+      setMyRecipes(data); 
+      } catch (err) {
+      console.error("Fetch error:", err);
+    }
   };
   getRecipe();
 }, [submitted]);
